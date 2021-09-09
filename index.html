@@ -19,7 +19,7 @@
         <header class="l-header">
             <nav class="nav bd-grid">
                 <div>
-                    <a href="#" class="nav__logo">LevTech</a>
+                    <a href="#" class="nav__logo">Rezafahlevi</a>
                 </div>
 
                 <div class="nav__menu" id="nav-menu">
@@ -165,15 +165,15 @@
                         <span class="contact__text">Jl. Perintis Kemerdekaan VI. no. 20</span>
                     </div>
 
-                    <form action="" class="contact__form">
+                    <form name="levtech-contact-form" action="" class="contact__form">
                         <div class="contact__inputs">
-                            <input type="text" placeholder="Nama" class="contact__input">
-                            <input type="mail" placeholder="Email" class="contact__input">
+                            <input type="text" placeholder="Nama" class="contact__input" name="nama" required>
+                            <input type="mail" placeholder="Email" class="contact__input" name="email" required>
                         </div>
 
-                        <textarea name="message" id="message" placeholder="Pesan" cols="0" rows="10" class="contact__input"></textarea>
+                        <textarea name="pesan" id="message" placeholder="Pesan" cols="0" rows="10" class="contact__input" required></textarea>
 
-                        <input type="submit" value="Kirim" class="contact__button">
+                        <input type="submit" value="Kirim" class="contact__button"> 
                     </form>
                 </div>
             </section>
@@ -214,5 +214,18 @@
 
         <!--===== MAIN JS =====-->
         <script src="assets/js/main.js"></script>
+
+        <!-- Script input form ke google sheet -->
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyrxu3T2k9O7RaydFluTzdrXOG1g_VP20r70OQ94BccTvQy9kzQlB_6Xe3ReY87HcCN/exec';
+            const form = document.forms['levtech-contact-form'];
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => console.log('Success!', response))
+                .catch(error => console.error('Error!', error.message))
+            })
+          </script>
     </body>
 </html>
